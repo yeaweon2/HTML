@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    
+</head>
+
+<body>
+    <form action="register.jsp" method="GET">
+        <table>
+            <caption>회원가입</caption>
+            <tbody>
+                <tr>
+                    <td><label for="user_id">회원ID :</label></td>
+                    <td><input type="text" name="user_id" id="user_id"></td>
+                </tr>
+                <tr>
+                    <td><label for="user_pw">비밀번호 :</label></td>
+                    <td><input type="password" name="user_pw" id="user_pw"></td>
+                </tr>
+                <tr>
+                    <td><label for="user_nm">이름 :</label></td>
+                    <td><input type="text" name="user_nm" id="user_nm"></td>
+                </tr>
+                <tr>
+                    <td><label for="user_gen">성별 :</label></td>
+                    <td>
+                        <input type="radio" name="user_gen" value="M" id="user_gen" checked>남자
+                        <input type="radio" name="user_gen" value="W" id="user_gen">여자
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="user_hobby">취미 :</label></td>
+                    <td>
+                        <select name="user_hobby" id="user_hobby">
+                            <option value="health">운동</option>
+                            <option value="music">음악</option>
+                            <option value="cook">요리</option>
+                            <option value="sleeping">낮잠</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="user_birth">생년월일 :</label></td>
+                    <td><input type="date" name="user_birth" id="user_birth"></td>
+                </tr>
+                <tr align="right">
+                    <td colspan="2">
+                        <input type="submit" value="회원가입">
+                        <input type="reset" value="취소">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</body>
+
+</html>

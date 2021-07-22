@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        <h2>텍스트 공간 입력 양식</h2>
+        <textarea name="introduce" id="introduce" cols="30" rows="10">텍스트를 작성하는 공간입니다.</textarea>
+        <input type="reset" value="다시작성">
+        <br><br>
+        <h3>Button 태그 사용</h3>
+        <button type="button" onclick="alert('클릭1 사용')">클릭-1</button>
+        <Input type="button" onclick="alert('클릭2 사용')">클릭-2</button>
+        <button type="button" onclick="alert('클릭3 사용')"><img src="../img/google.jpg"></button>
+
+
+        <select name="subjects" size="4" multiple >
+            <option value="1" selected>HTML5</option>
+            <option value="2" >CSS</option>
+            <option value="3" >JAVA</option>
+            <option value="4" >Jquery</option>
+            <option value="5" >C++</option>
+        </select>
+        <br><br>
+        <label >전공분야를 선택해주세요.</label>
+        <select name="major" >
+            <optgroup label="computer">
+                <option>Software</option>
+                <option>Robot</option>
+                <option>System</option>
+            </optgroup>
+            <optgroup label="language">
+                <option>Korea</option>
+                <option>Englist</option>
+                <option>China</option>
+                <option>Germany</option>
+            </optgroup>
+            <optgroup label="business">
+                <option>Service</option>
+                <option>Education</option>
+                <option>Communication</option>
+                <option>Marketing</option>
+                <option>Sort</option>
+            </optgroup>                        
+        </select>
+
+        <input type="text" list="majorlist" name="major">
+        <datalist id = "majorlist">
+            <option value="Software">소프트웨어</option>
+            <option value="Robot">로봇</option>
+            <option value="Radio">라디오</option>
+            <option value="System">시스템</option>
+            <option value="Service">서비스</option>
+            <option value="Education">교육</option>
+        </datalist>
+        <br><br>
+        <input type="month" >
+        <input type="week" >
+        <input type="time" >
+        <input type="datetime-local" >
+        <br><br>
+        <input type="color" value="#0000ff">
+        <input type="email" name="myemail" >
+        <input type="url" name="myurl" >
+        <h3>학습량 그래프</h3>
+        홍민성 : <meter min="0" max="100" optimum="50" value="60">60 out of 100</meter><br>
+        송지효 : <meter low="0.3" hign="0.5" value="0.22">22%</meter><br>
+    </form>
+</body>
+
+</html>

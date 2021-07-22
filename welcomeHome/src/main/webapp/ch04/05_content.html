@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05_content</title>
+</head>
+
+<body>
+    <img src="../img/html.bmp" title="Html5 로고이미지" alt="이미지가 표시되지 않습니다." style="float: left;">
+    <br> <br>
+    <a href="http://cafe.naver.com/go2web" target="_blank"><img src="../img/go2web.jpg" title="저자 홈페이지로 이동"></a>
+    <p></p>
+    <figure>
+        <img src="../img/google.jpg" alt="google site" title="구글로 이동">
+        <figcaption>[그림3] Google</figcaption>
+    </figure>
+    <p></p>
+    <!-- <img src="../img/newton.gif" alt=""> -->
+    <h3>오디오 재생</h3>
+    <audio src="../img/eagle.mp3" controls loop autoplay></audio>
+    <h3>오디오 다중 재생</h3>
+    <audio controls>
+        <source src="../img/chicken.mp3" type="audio/mp3" />
+        <source src="../img/eagle.mp3" type="audio/mp3" />
+        <source src="../img/bear.mp3" type="audio/mp3" />
+        오디오 파일을 재생할 수 없습니다.
+    </audio>
+    <h3>비디오 자동 재생</h3>
+    <video src="../img/bear.mp4" controls loop autoplay width="300" height="250"></video>
+    <video src="../img/sample.mp4" controls loop autoplay width="300" height="250"></video>
+
+    <video controls autoplay>
+        <source src="http://media.w3.org/movie/vedio_file.ogv" type="video/ogv" />
+        <source src="../img/trailer.mp4" type="video/mp4" />
+        비디오 파일을 재생할 수 없습니다.
+    </video>
+    <p></p>
+    <embed src="../img/drop.avi">
+        <p></p>
+    <embed src="http://www.hanbit.co.kr" width="900" height="600">
+
+    <h3>PDF파일 삽입</h3>
+    <object data="../img/pdflogo.pdf" type="application/pdf"></object>
+</body>
+
+</html>

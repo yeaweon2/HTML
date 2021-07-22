@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+</head>
+
+<body>
+    <form>
+        <h2>회원가입</h2>
+        <table border="1" style="width: 300px; " >
+            <tbody>
+                <tr>
+                    <td style="width: 80px; text-align: left;">아이디</td>
+                    <td><input type="text" name="user_id" id="user_id"  style="width: 100px;"> <input type="button" value="중복확인"  style="width: 70px;"></td>
+                </tr>
+                <tr>
+                    <td>비밀번호</td>
+                    <td><input type="password" name="user_pw" id="user_pw" style="width: 200px;"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="password" name="user_pw2" id="user_pw2" placeholder="비밀번호 재확인" style="width: 200px;"></td>
+                </tr>
+                <tr>
+                    <td>이름</td>
+                    <td><input type="text" name="user_name" id="user_name" placeholder="김실명"></td>
+                </tr>
+                <tr>
+                    <td>주소</td>
+                    <td>
+                        <input type="text" name="user_addr1" id="user_addr1" style="width: 40px;" > -
+                        <input type="text" name="user_addr1" id="user_addr2" style="width: 40px;" > <input type="button" value="우편번호">
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="text" name="user_addr1" id="user_addr1" style="width: 200px;"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="text" name="user_addr1" id="user_addr1" style="width: 200px;"></td>
+                </tr>
+                <tr>
+                    <td>휴대전화</td>
+                    <td>
+                        <select name="tel" style="width: 60px;">
+                            <option value="010">010</option>
+                            <option value="02">02</option>
+                            <option value="031">031</option>
+                            <option value="046">046</option>
+                            <option value="053">053</option>
+                        </select>
+                        <input type="tel" name="user_tel1" id="user_tel1" style="width: 50px;" > - <input type="tel" name="user_tel2" id="user_tel2" style="width: 50px;" >
+                    </td>
+                </tr>
+                <tr>
+                    <td>전화번호</td>
+                    <td>
+                        <select name="tel" style="width: 60px;">
+                            <option value="010">010</option>
+                            <option value="02">02</option>
+                            <option value="031">031</option>
+                            <option value="046">046</option>
+                            <option value="053">053</option>
+                        </select>
+                        <input type="tel" name="user_tel1" id="user_tel1" style="width: 50px;" > - <input type="tel" name="user_tel2" id="user_tel2" style="width: 50px;" >
+                    </td>
+                </tr>
+                <tr>
+                    <td>이메일</td>
+                    <td>
+                        <input type="text" name="user_email1" id="user_email1" style="width: 80px;" >
+                        <select name="eamil" style="width: 100px;" >
+                            <option value="naver">@naver.com</option>
+                            <option value="google">@google.com</option>
+                            <option value="daum">@daum.net</option>
+                            <option value="yedam">@yedam.ac</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>생년월일</td>
+                    <td>
+                        <input type="radio" name="user_bir" id="user_bir" checked style="background-color: salmon;">양력
+                        <input type="radio" name="user_bir" id="user_bir">음력
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <select >
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                            <option value="1999">1999</option>
+                            <option value="1998">1998</option>
+                            <option value="1997">1997</option>
+                        </select>    
+                        <select >
+                            <option value="1" >1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7" selected>7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>                                                                  
+                        <select >
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22" selected>22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+
+                        </select>                          
+                        <!-- <input type="number" name="year" id="year" min="1970" max="2021">
+                        <input type="number" name="year" id="month" min="1" max="12">
+                        <input type="number" name="year" id="day" min="1" max="31"> -->
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="checkbox" checked style="border-color: royalblue;">예담의 이메일을 수신합니다. <br>
+                        <input type="checkbox" checked style="border-color: royalblue;">예담의 SMS를 수신합니다.
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button style="color:seashell; background-color: dimgray; border-style: none; border-radiu: 0%;width: 130px; height: 40px; font-weight: bold; font-size: large">가입취소</button>
+                        <button style="color: floralwhite; background-color: red; border-style: none; border-radiu: 0%; width: 130px; height: 40px; font-weight: bold; font-size: large;">회원가입</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</body>
+
+</html>

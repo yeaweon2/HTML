@@ -59,33 +59,24 @@
         }
     </style>
     <script>
-        function createTrTag(num, title, writer, regDate) {
-            let trTag = document.createElement('tr');
-            trTag.setAttribute('class','altRow');
-
-            let tdTag = document.createElement('td');
-            let numText = document.createTextNode(num);
-            trTag.appendChild(tdTag);
-
-            return trTag;
-        }
+        
     </script>
 </head>
 
 <body>
-    <form action="">
-        번호 : <input type="number" name="" id=""><br>
-        제목 : <input type="text" name="" id=""><br>
-        이름 : <input type="text" name="" id=""><br>
-        날짜 : <input type="date" name="" id=""><br>
-        <input type="submit" value="등록">
+    <form name="frm" action="" onsubmit="addList(event)" >
+        번호 : <input type="number" name="boNo" id="boNo"><br>
+        제목 : <input type="text" name="boTitle" id="boTitle"><br>
+        이름 : <input type="text" name="boWriter" id="boWriter"><br>
+        날짜 : <input type="date" name="boRegDate" id="boDate"><br>
+        <input type="submit" value="등록" >
         <input type="reset" value="다시작성">
     </form>
     <!-- Ex21_board.htm -->
 
     <h3>게시판 리스트</h3>
-    <table id="list">
-        <tr>
+    <table id="list" class="list">
+        <!-- <tr>
             <th>번호</th>
             <th>제목</th>
             <th>이름</th>
@@ -116,10 +107,88 @@
             <td class="td2">게시판 만들기 연습입니다.</td>
             <td class="td3">홍길동</td>
             <td class="td4">2012년 1월 5일</td>
-        </tr>
+        </tr> -->
 
     </table>
+<script>
+    makeTable();
+    function makeTable(){
+        let tableTag = document.getElementById('list');
+        let tbodyTag = document.createElement('tbody');        
+        tbodyTag.setAttribute('id', 'tbdy');
+        tbodyTag.setAttribute('class', 'tbdy');
 
+        let trHead = document.createElement('tr');
+        trHead.setAttribute('class', 'thHead');
+        let thCol = [ '번호','제목','이름','날짜'];
+        for( col in thCol ){
+            let thHead = document.createElement('th');    
+            let th = document.createTextNode(thCol[col]);
+            thHead.appendChild(th);
+            trHead.appendChild(thHead);
+        }        
+        
+        tbodyTag.appendChild(trHead);
+        tableTag.appendChild(tbodyTag);
+    }
+
+    function addList(e){
+        e.preventDefault(); 
+        let boNo = document.frm.boNo.value;
+        let boTitle = document.frm.boTitle.value;
+        let boWriter = document.frm.boWriter.value;
+        let boRegDate = document.frm.boRegDate.value;
+
+        if(document.frm.boNo.value == ""){
+            alert("번호를 입력하세요.");
+            document.frm.boNo.focus();
+            return; 
+        } 
+
+        if(document.frm.boTitle.value == ""){
+            alert("제목을 입력하세요.");
+            document.frm.boTitle.focus();
+            return; 
+        }
+
+        if(document.frm.boWriter.value == ""){
+            alert("이름을 입력하세요.");
+            document.frm.boWriter.focus();
+            return; 
+        }
+        
+        if(document.frm.boRegDate.value == ""){
+            alert("날짜를 입력하세요.");
+            document.frm.boRegDate.focus();
+            return; 
+        }
+        let tbodyTag = document.getElementById('tbdy');
+        tbodyTag.appendChild(createTrTag(boNo, boTitle, boWriter, boRegDate));
+
+        let altRow = document.querySelectorAll("tr:not(.thHead)");
+        console.log(altRow);
+        for(let i = 0; i < altRow.length ; i++){
+            if( (i+1)%2 == 0 ){
+                altRow[i].setAttribute('class','altRow');
+            }
+        }
+    }
+
+    function createTrTag(num, title, writer, regDate) {
+        let trTag = document.createElement('tr');
+
+        let cols = [ num, title, writer, regDate ];
+        for(let i=0;i<cols.length;i++){
+            let tdTag = document.createElement('td');
+            let txt = document.createTextNode(cols[i]);
+            tdTag.setAttribute('class' , 'td'+(i+1) );
+            tdTag.appendChild(txt);
+            trTag.appendChild(tdTag);
+        }
+        return trTag;
+    }    
+
+</script>
 </body>
 
 </html>

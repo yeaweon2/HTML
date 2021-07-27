@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attribute</title>
+    <style>
+        p[text^= "http"][text$="net"] {
+            font-size: 19px;
+            color: darkgreen;
+            font-weight: bolder;
+            background-color: bisque;
+        }
+
+        p[text*="google"] {
+            font-size: 19px;
+            color: red;
+            font-weight: bolder;
+            background-color:gray
+        }
+    </style>
+</head>
+<body>
+    <p text='hello'>모든 텍스트</p>
+    <p text='red'>텍스트 매칭 속성</p>
+    <p text='aa bb cc'>리스트 매칭 속성</p>
+    <p text='a1-b1-c1'>범위 텍스트 매칭 속성</p>
+    <p text='img/pic.jpg'>텍스트 시작 매칭 속성</p>
+    <p text='img/pic.png'>텍스트 끝 매칭 속성</p>
+    <p text='Seongyong Hong'>텍스트 패턴 매칭 속성</p>
+    <p text='http://www.daum.net'>다음</p>
+    <p text='https://www.naver.com'>네이버</p>
+    <p text='https://www.google.com'>구글</p>
+</body>
+</html>

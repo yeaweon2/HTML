@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javascript/function2.html</title>
+    <style>
+        button {
+            margin-left: 5px ;
+        }
+    </style>
+</head>
+<body>
+    입력 : <input type="text" id="inputVal" ><button onclick="addFunc()">추가</button>
+    <script>
+        console.log(this);
+        console.log(window.document.URL);
+
+        const fruits = ['Apple','Banana','Cherry','Grape'];
+
+        function makeList(){
+            let ulTag = document.createElement('ul');
+            for(let i = 0; i < fruits.length ; i++){
+                ulTag.appendChild(makeLiTag(fruits[i]));
+            }
+            document.body.appendChild(ulTag);
+        }
+
+        function makeLiTag(arg){
+            let liTag = document.createElement('li');
+            let text = document.createTextNode(arg);
+            liTag.appendChild(text);
+            
+            liTag.onmouseover = function(){
+                this.style.backgroundColor='yellow';
+            };
+
+            liTag.onmouseout = function(){
+                this.style.backgroundColor='';
+            };
+
+            let btn = document.createElement('button');
+            let delText = document.createTextNode('Delete');
+            // btn.onclick = function() {
+            //     console.log('delete');
+            // };
+
+            btn.onclick = delFunc;  // 괄호생략
+
+            btn.appendChild(delText);
+            liTag.appendChild(btn);
+            
+            return liTag;
+        }
+
+        function delFunc(){
+            //console.log(this);    // 이벤트일 경우에 this는 이벤트가 발생하는 element.
+            this.parentNode.remove();
+        }
+
+        // 사용자 입력값을 사용해서 ul 하위에 자식으로 append.
+        function addFunc(){
+            let userInput = document.getElementById('inputVal').value; 
+            console.log(userInput);
+
+            let ul = document.getElementsByTagName('ul');  // TagName은 컬렉션으로 가져오기때문에 사용시 노드를 선택해주고 추가해야함. 하나밖에 없어도
+            console.log(ul);
+            ul[0].appendChild(makeLiTag(userInput));
+        }
+
+        makeList();
+    </script>
+</body>
+</html>

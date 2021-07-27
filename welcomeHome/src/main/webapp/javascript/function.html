@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="js/function.js"></script> -->
+    <style>
+        input {
+            width: 100px;
+        }
+    </style>
+    
+</head>
+<body>
+    <input type="number" name="num1" id="num1"> +
+    <input type="number" name="num2" id="num2"> =
+    <input type="text" name="result" id="result">
+    <p />
+    <button onClick='cal()'>계산하기</button>
+    <script>
+        function newFunc(args, args2) {
+            console.log('newFunc(' + args + ' , ' + args2 + ')');
+            let ary = [ args, args2 ];
+            let obj = {
+                name: args,
+                age: args2,
+                showInfo : function (){
+                    return '이름 : ' + this.name + " , 나이 : " + this.age;
+                }
+            };
+
+            let str = '<li>' + args + ', ' + args2 + '</li>';
+            return str;
+        }
+        let result = newFunc('Hong', 12);
+//        console.log(typeof result, result, result.showInfo()) ;
+        document.write('<ul>');
+        document.write(result);
+        document.write(newFunc('Hwang',32))
+        document.write('</ul>');
+
+        function makeList(){
+            let str = '<li>Hello</li>';                     // node ==> tag(element)
+            let li = document.createElement('li');          // element 생성.
+            li.setAttribute('id', 'id1');                   // Attribute node를 추가.
+            let text = document.createTextNode('Hello');    // textNode를 생성.
+            li.appendChild(text);                           // <li>Hello</li>
+            return li;
+        }
+        let ul = document.getElementsByTagName('ul');
+        ul[0].appendChild(makeList());
+
+        let h1 = document.createElement('h1');    
+        let text = document.createTextNode('Java');
+        h1.appendChild(text);                          
+        let body = document.getElementsByTagName('body');
+        body[0].appendChild(h1);
+        
+
+
+    </script>    
+</body>
+</html>

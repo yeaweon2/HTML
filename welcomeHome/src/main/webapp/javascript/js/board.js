@@ -7,7 +7,7 @@ function makeTable() {
     let tbodyTag = document.createElement('tbody');
     tbodyTag.setAttribute('id', 'tbdy');
     tbodyTag.setAttribute('class', 'tbdy');
-
+ 
     let trHead = document.createElement('tr');
     trHead.setAttribute('class', 'thHead');
     let thCol = ['번 호', '제 목', '이 름', '날 짜','선 택'];

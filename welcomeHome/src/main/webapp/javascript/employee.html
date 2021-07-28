@@ -95,7 +95,7 @@ let jsonData = `[{"id":1,"first_name":"Ellswerth","last_name":"Stanlike","email"
             for (let i = 0; i < objData.length; i++) {
                 let tr = document.createElement('tr');    
 
-                for(let field in objData[0] ){
+                for(let field in objData[0] ){ 
                     let td = document.createElement('td');
                     let txt = document.createTextNode(objData[i][field]);
                     console.log(objData[field]);

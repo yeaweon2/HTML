@@ -17,7 +17,7 @@ function makeTable() {
         thHead.appendChild(th);
         trHead.appendChild(thHead);
     }
-    tHeadTag.appendChild(trHead);
+    tHeadTag.appendChild(trHead);  
     tableTag.appendChild(tHeadTag);
     tableTag.appendChild(tbodyTag);
 

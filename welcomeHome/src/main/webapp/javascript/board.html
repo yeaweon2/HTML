@@ -7,25 +7,68 @@
     <meta name="generator" content="editplus" />
     <meta name="author" content="김종현" />
     <style type="text/css">
-        /*디자인은 큰틀부터 디자인하자.*/
-        #list {
-            width: 500px;
-            border: 1px solid rgb(146, 135, 116);
-            /*겉테두리와 안테두리를 하나로 합쳐준다. */
-            border-collapse: collapse;
+        @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+
+        #writerInfo {
+            border: 1px solid rgb(121, 100, 66);
+            width: 280px;
+
         }
 
-        /* 누구 자식인지 반드시 명시해 준다.*/
+        #writerInfo .infoTitle {
+            text-align: center;
+            background-color: rgb(192, 201, 209);
+            width: 60px;
+            font-family: 'Jeju Gothic', sans-serif;
+        }
+
+        #writerInfo .infoBtn {
+            text-align: right;
+        }
+
+        input#boNo,
+        input#boWriter,
+        input#boTitle,
+        input#boDate {
+            width: 200px;
+        }
+
+        input.chkBtn , #delBtn{
+            vertical-align: middle;
+            /* Input 과 타 요소들의 텍스트 높이를 동일하게 세로 정렬한다 */
+            line-height: 1;
+            cursor: pointer;
+            /* input type에 따라 커서의 모양이 다르다. */
+
+            /* 패딩은 Input과 다른 태그들이 달라야 한다 */
+            padding: 8px 12px;
+            /* 디자인 요소들 */
+            transition: all 0.3s;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2);
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, .4);
+            border-radius: 0;
+            background-color: rgb(111, 114, 112);
+            color: white;
+            font-weight: bold;
+        }
+
+        #list {
+            width: 600px;
+            height: 30px;
+            border-top: 1px solid rgb(146, 135, 116);
+            border-collapse: collapse;
+            font-family: 'Jeju Gothic', sans-serif;
+        }
+
         #list td,
         #list th {
-            font-size: 12px;
-            border: 1px solid rgb(121, 100, 66);
-            ;
-            padding: 3px;
+            font-size: 14px;
+            border-bottom: 1px solid rgb(121, 100, 66);
+            padding: 10px;
         }
 
         #list th {
-            background-color: #eed0ee;
+            background-color: #eedbf5;
         }
 
         #list .td1 {
@@ -53,28 +96,57 @@
             text-align: center;
         }
 
-        /*부모 자식 관계 */
         #list .altRow {
-            background-color: #d7d4ee;
+            background-color: #e9eaf8;
+        }
+
+        #checkBoxTd {
+            width: 5px;
+            text-align: center;
+        }
+
+        #delBtn {
+            margin-bottom: 10px;
+           float: left;
+
         }
     </style>
-    <script>
-        
-    </script>
 </head>
 
 <body>
-    <form name="frm" action="" onsubmit="addList(event)" >
-        번호 : <input type="number" name="boNo" id="boNo"><br>
-        제목 : <input type="text" name="boTitle" id="boTitle"><br>
-        이름 : <input type="text" name="boWriter" id="boWriter"><br>
-        날짜 : <input type="date" name="boRegDate" id="boDate"><br>
-        <input type="submit" value="등록" >
-        <input type="reset" value="다시작성">
-    </form>
-    <!-- Ex21_board.htm -->
-
-    <h3>게시판 리스트</h3>
+    <div id='inputForm'>
+        <form name="frm" class='frm' action="" onsubmit="addList(event)" onreset="resetBtnClick()">
+            <table id="writerInfo">
+                <tbody>
+                    <tr>
+                        <td class='infoTitle'>번 호</td>
+                        <td><input type="number" name="boNo" id="boNo"></td>
+                    </tr>
+                    <tr>
+                        <td class='infoTitle'>제 목</td>
+                        <td><input type="text" name="boTitle" id="boTitle" value='JavaScript입니다.'></td>
+                    </tr>
+                    <tr>
+                        <td class='infoTitle'>이 름</td>
+                        <td><input type="text" name="boWriter" id="boWriter" value="홍길동"></td>
+                    </tr>
+                    <tr>
+                        <td class='infoTitle'>날 짜</td>
+                        <td><input type="date" name="boRegDate" id="boRegDate" value='2021-07-28'></td>
+                    </tr>
+                    <tr id='btnRow'>
+                        <td class='infoBtn' colspan="2">
+                            <input type="submit" value="등록" class='chkBtn'>
+                            <!-- <input type="reset" value="클리어" class='chkBtn'> -->
+                            <input type="button" value="수정" class='chkBtn'>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <br>
+    <button id="delBtn">선택삭제</button>
     <table id="list" class="list">
         <!-- <tr>
             <th>번호</th>
@@ -82,7 +154,6 @@
             <th>이름</th>
             <th>날짜</th>
         </tr>
-
         <tr>
             <td class="td1">55</td>
             <td class="td2">게시판 만들기 연습입니다.</td>
@@ -110,85 +181,7 @@
         </tr> -->
 
     </table>
-<script>
-    makeTable();
-    function makeTable(){
-        let tableTag = document.getElementById('list');
-        let tbodyTag = document.createElement('tbody');        
-        tbodyTag.setAttribute('id', 'tbdy');
-        tbodyTag.setAttribute('class', 'tbdy');
-
-        let trHead = document.createElement('tr');
-        trHead.setAttribute('class', 'thHead');
-        let thCol = [ '번호','제목','이름','날짜'];
-        for( col in thCol ){
-            let thHead = document.createElement('th');    
-            let th = document.createTextNode(thCol[col]);
-            thHead.appendChild(th);
-            trHead.appendChild(thHead);
-        }        
-        
-        tbodyTag.appendChild(trHead);
-        tableTag.appendChild(tbodyTag);
-    }
-
-    function addList(e){
-        e.preventDefault(); 
-        let boNo = document.frm.boNo.value;
-        let boTitle = document.frm.boTitle.value;
-        let boWriter = document.frm.boWriter.value;
-        let boRegDate = document.frm.boRegDate.value;
-
-        if(document.frm.boNo.value == ""){
-            alert("번호를 입력하세요.");
-            document.frm.boNo.focus();
-            return; 
-        } 
-
-        if(document.frm.boTitle.value == ""){
-            alert("제목을 입력하세요.");
-            document.frm.boTitle.focus();
-            return; 
-        }
-
-        if(document.frm.boWriter.value == ""){
-            alert("이름을 입력하세요.");
-            document.frm.boWriter.focus();
-            return; 
-        }
-        
-        if(document.frm.boRegDate.value == ""){
-            alert("날짜를 입력하세요.");
-            document.frm.boRegDate.focus();
-            return; 
-        }
-        let tbodyTag = document.getElementById('tbdy');
-        tbodyTag.appendChild(createTrTag(boNo, boTitle, boWriter, boRegDate));
-
-        let altRow = document.querySelectorAll("tr:not(.thHead)");
-        console.log(altRow);
-        for(let i = 0; i < altRow.length ; i++){
-            if( (i+1)%2 == 0 ){
-                altRow[i].setAttribute('class','altRow');
-            }
-        }
-    }
-
-    function createTrTag(num, title, writer, regDate) {
-        let trTag = document.createElement('tr');
-
-        let cols = [ num, title, writer, regDate ];
-        for(let i=0;i<cols.length;i++){
-            let tdTag = document.createElement('td');
-            let txt = document.createTextNode(cols[i]);
-            tdTag.setAttribute('class' , 'td'+(i+1) );
-            tdTag.appendChild(txt);
-            trTag.appendChild(tdTag);
-        }
-        return trTag;
-    }    
-
-</script>
+    <script src="js/board.js"></script>
 </body>
 
 </html>

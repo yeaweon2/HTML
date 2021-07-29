@@ -5,13 +5,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>javascript/employee.html</title> 
+    <title>javascript/employee.html</title>
     <style>
-        #empList {
-            border : 1px solid;
+        /* #empList {
+            border-top: 1px solid;
+            border-collapse: collapse;
+
+        } */
+
+        thead {
+            height: 30px;
+            background-color: azure;
+        }
+
+        #empList tr {
+            border-bottom: 1px solid;
             border-collapse: collapse;
         }
-    </style>    
+        
+
+        #empList .td1 {
+            text-align: center;
+            width: 70px;
+        }
+
+        #empList .td2 {
+            text-align: left;
+            width: 90px;
+        }
+
+        #empList .td3 {
+            text-align: left;
+            width: 100px;
+        }
+
+        #empList .td4 {
+            text-align: left;
+            width: 240px;
+        }
+
+        #empList .td5 {
+            text-align: left;
+            width: 110px;
+        }
+
+        .btnTd {
+            text-align: center;
+            width: 70px;
+        }
+    </style>
     <!-- <script>
         let jsonData = `[{"id":1,"first_name":"Ellswerth","last_name":"Stanlike","email":"estanlike0@biblegateway.com","gender":"Non-binary"},
 {"id":2,"first_name":"Matthieu","last_name":"McClymond","email":"mmcclymond1@cbslocal.com","gender":"Genderqueer"},
@@ -59,77 +101,7 @@
     <div id="show">
 
     </div>
-    <script>
-
-let jsonData = `[{"id":1,"first_name":"Ellswerth","last_name":"Stanlike","email":"estanlike0@biblegateway.com","gender":"Non-binary"},
-{"id":2,"first_name":"Matthieu","last_name":"McClymond","email":"mmcclymond1@cbslocal.com","gender":"Genderqueer"},
-{"id":3,"first_name":"Titus","last_name":"Flucker","email":"tflucker2@pcworld.com","gender":"Polygender"},
-{"id":4,"first_name":"Eldin","last_name":"Curuclis","email":"ecuruclis3@pen.io","gender":"Non-binary"},
-{"id":5,"first_name":"Normie","last_name":"Lippett","email":"nlippett4@imgur.com","gender":"Polygender"},
-{"id":6,"first_name":"Krissie","last_name":"Bremley","email":"kbremley5@reddit.com","gender":"Agender"},
-{"id":7,"first_name":"Vin","last_name":"Osbaldstone","email":"vosbaldstone6@vistaprint.com","gender":"Genderqueer"},
-{"id":8,"first_name":"Gillan","last_name":"Houson","email":"ghouson7@zimbio.com","gender":"Agender"},
-{"id":9,"first_name":"Madelene","last_name":"Hannigan","email":"mhannigan8@gmpg.org","gender":"Agender"},
-{"id":10,"first_name":"Denny","last_name":"Kennea","email":"dkennea9@columbia.edu","gender":"Agender"}]`;
-
-
-        let objData = JSON.parse(jsonData);
-
-        function makeTable() {
-            // 사원번호 성 이름 이메일 성별 삭제
-            let table = document.createElement('table');
-            table.setAttribute('id','empList');
-            let thead = document.createElement('thead');
-            let tbody = document.createElement('tbody');
-            let tr = document.createElement('tr');
-            let title = ['사원번호', '성', '이름', '이메일', '성별', '삭제'];
-            for (let i = 0; i < title.length; i++) {
-                let th = document.createElement('th');
-                let thTxt = document.createTextNode(title[i]);
-                th.appendChild(thTxt);
-                tr.appendChild(th);
-            }
-
-            thead.appendChild(tr);
-
-            for (let i = 0; i < objData.length; i++) {
-                let tr = document.createElement('tr');    
-
-                for(let field in objData[0] ){ 
-                    let td = document.createElement('td');
-                    let txt = document.createTextNode(objData[i][field]);
-                    console.log(objData[field]);
-                    td.appendChild(txt);
-                    tr.appendChild(td);
-                }  
-
-                let btnTd = document.createElement('td');
-                let btn = document.createElement('input');
-                
-                btn.setAttribute('value', '삭제');
-                btn.setAttribute('type', 'button');
-                
-                btnTd.appendChild(btn);
-                tr.appendChild(btnTd);
-                tbody.appendChild(tr);
-            }
-
-            table.appendChild(tbody);
-            table.appendChild(thead);
-            let div = document.getElementById('show');
-            div.appendChild(table);
-        }
-        makeTable();
-
-        function addEmplyee(){
-            
-            
-            
-            
-            
-        }
-
-    </script>
+    <script src="js/employee.js"></script>
 </body>
 
 </html>

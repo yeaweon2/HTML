@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .jsonList {
+            border: 1px solid black;
+        }
+
+        .pagination button {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+            border: 1px solid #ddd;
+        }
+
+        .pagination button.active {
+            background-color: #4CAF50;
+            color: white;
+            border: 1px solid #4CAF50;
+        }
+    </style>
+    <script>
+        ajax('jsonFile.json', 1);
+
+        function ajax(url, page) {
+            let xhtp = new XMLHttpRequest(); // new Object();
+            xhtp.open('get', url);
+            xhtp.send();
+            xhtp.onreadystatechange = function () {
+                if (xhtp.readyState == 4 && xhtp.status == 200) {
+                    let data = JSON.parse(xhtp.response);
+                    makePage(data, page);
+                    makePageBtn(data.length);
+                }
+            };
+        }
+
+        function makePage(data, page) {
+            let table = document.createElement('table');
+            table.className = 'jsonList';
+            let thead = document.createElement('thead');
+            let tr = document.createElement('tr');
+
+            let titleTxt = ['ID', 'First Name', 'Last Name', 'E-mail'];
+            for (let i = 0; i < titleTxt.length; i++) {
+                let th = document.createElement('th');
+                th.appendChild(document.createTextNode(titleTxt[i]));
+                console.log(titleTxt[i]);
+                tr.appendChild(th);
+            }
+            thead.appendChild(tr);
+            let tbody = document.createElement('tbody');
+
+            for (let i = 0; i < data.length; i++) {
+                let newTr = makeTr(data[i], page);
+                tbody.appendChild(newTr);
+            }
+
+            table.appendChild(tbody);
+            table.appendChild(thead);
+            let divShow = document.getElementById('show');
+            divShow.appendChild(table);
+        }
+
+        function makeTr(data, page) {
+            let tr = document.createElement('tr');
+            for (field in data) {
+                let td = document.createElement('td');
+                td.appendChild(document.createTextNode(data[field]));
+                tr.appendChild(td);
+            }
+            return tr;
+        }
+
+        function makePageBtn(len) {
+            let num = len / 20;
+            for (let i = 0; i < num; i++) {
+                let btn = document.createElement('button');
+                let btnTxt = document.createTextNode(i + 1);
+                let btnDiv = document.getElementById('btnDiv');
+                btn.appendChild(btnTxt);
+                btnDiv.appendChild(btn);
+                btn.addEventListener('click', function () {
+                    
+                });
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="show"></div>
+    <br>
+    <div id='btnDiv' class="pagination">
+
+    </div>
+    <br><br>
+</body>
+
+</html>

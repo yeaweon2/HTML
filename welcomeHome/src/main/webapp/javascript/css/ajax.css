@@ -1,0 +1,56 @@
+span {
+    color: rgb(83, 68, 92);
+    margin-left: 5px;
+    display: inline-block;
+    width: 20px;
+}
+
+strong {
+    background-color: rgb(211, 240, 192);
+    margin-left : 20px;
+    text-align: left;
+    display: inline-block;
+}
+
+.idCls {
+    text-align: center;
+}
+.first {
+    width: 20%;
+}
+.last {
+    width: 20%;
+}
+
+.email {
+    width: 40%;
+}
+
+.row {
+    border: 1px solid black;
+    margin-left: 5px;
+}
+
+.title {
+    border: 1px solid black;
+    margin-left: 5px;
+}
+
+#show>div:nth-of-type(2n) {
+    background-color: rgb(253, 224, 251);
+}
+
+.pagination button {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+}
+
+.pagination button.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}

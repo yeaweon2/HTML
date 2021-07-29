@@ -27,24 +27,22 @@
         }
     </style>
     <script>
-        ajax('jsonFile.json', 1);
+        ajax('jsonFile.json', 1, true);
 
-        function ajax(url, page) {
+        function ajax(url, page, mode) {
             let xhtp = new XMLHttpRequest(); // new Object();
             xhtp.open('get', url);
             xhtp.send();
             xhtp.onreadystatechange = function () {
                 if (xhtp.readyState == 4 && xhtp.status == 200) {
                     let data = JSON.parse(xhtp.response);
-                    makePage(data, page);
+                    makePage(data, page, mode);
                     makePageBtn(data.length);
                 }
             };
         }
 
-        function makePage(data, page) {
-            let table = document.createElement('table');
-            table.className = 'jsonList';
+        function makeTHead(){
             let thead = document.createElement('thead');
             let tr = document.createElement('tr');
 
@@ -56,17 +54,51 @@
                 tr.appendChild(th);
             }
             thead.appendChild(tr);
-            let tbody = document.createElement('tbody');
+            return thead;
+        }
 
-            for (let i = 0; i < data.length; i++) {
-                let newTr = makeTr(data[i], page);
-                tbody.appendChild(newTr);
+        function makePage(data, page, mode) {
+            if( mode ){
+                let table = document.createElement('table');
+                table.className = 'jsonList';
+
+                let tbody = document.createElement('tbody');
+
+                let startCnt = (page-1) * 20;
+                let endCnt = page *20;
+
+                for (let i = startCnt; i < endCnt; i++) {
+                    if( endCnt < data.length ){
+                        let newTr = makeTr(data[i], page);
+                        tbody.appendChild(newTr);
+                    }
+                }
+
+                table.appendChild(tbody);
+                table.appendChild( makeTHead());
+                let divShow = document.getElementById('show');
+                divShow.appendChild(table);
+
+            }else{
+                let delList = document.querySelector('table>tbody');
+                let delCnt = delList.children.length;
+                for( let i =0; i < delCnt ; i++){
+                    delList.removeChild(delList.children[0]);
+                } 
+
+                let startCnt = (page-1) * 20;
+                let endCnt = page *20;
+                let tbdy = document.getElementsByTagName('tbody');
+
+                for (let i = startCnt; i < endCnt; i++) {
+                    if( endCnt < data.length ){
+                        let newTr = makeTr(data[i], page);
+                        console.log(newTr);
+                        tbdy.appendChild(newTr);
+                    }
+                }
             }
-
-            table.appendChild(tbody);
-            table.appendChild(thead);
-            let divShow = document.getElementById('show');
-            divShow.appendChild(table);
+            
         }
 
         function makeTr(data, page) {
@@ -88,7 +120,15 @@
                 btn.appendChild(btnTxt);
                 btnDiv.appendChild(btn);
                 btn.addEventListener('click', function () {
-                    
+                    let btns = document.querySelectorAll('.pagination > button');
+
+                    for (let i = 0; i < btns.length; i++) {
+                        btns[i].className = '';
+                    }
+                     
+
+                    ajax('jsonFile.json', this.innerHTML, false);
+                    this.className = 'active';                    
                 });
             }
         }

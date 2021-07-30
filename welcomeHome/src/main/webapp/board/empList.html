@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>empList.html</title>
+    <style>
+        label {
+            width: 80px;
+            text-align: right;
+            display: inline-block;
+            margin-right: 10px;
+            background-color: rgb(220, 241, 215);
+            color :darkgreen;
+            font-weight: bold;
+        }
+
+        #container {
+            border: 1px solid rgb(75, 102, 22);
+            padding: 8px;
+            width: 270px;
+            background-color: ivory;
+        }
+
+        .submitClass {
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        let body = document.getElementsByTagName('body');
+
+        let div = document.createElement('div');
+        div.setAttribute('id', 'container');
+
+        let form = document.createElement('form');
+        form.setAttribute('action', '../EmpListServlet.do');
+        form.setAttribute('method', 'GET');
+        form.addEventListener('submit', function(event){
+            event.preventDefault();
+            let url = this.getAttribute('action');
+            let xhtp = new XMLHttpRequest();
+            xhtp.open('get', url);
+            xhtp.send();
+            xhtp.onload = function(){
+                let data = JSON.parse(xhtp.responseText)
+                console.log(data);
+            }
+        });
+
+        let labId = document.createElement('label');
+        labId.setAttribute('for', 'uid');
+        labId.appendChild(document.createTextNode('아이디 : '));
+
+        let uidInput = document.createElement('input');
+        uidInput.setAttribute('type', 'text');
+        uidInput.setAttribute('name', 'uid');
+        uidInput.setAttribute('id', 'uid');
+
+        let labUpw = document.createElement('label');
+        labUpw.setAttribute('for', 'upw');
+        labUpw.appendChild(document.createTextNode('비밀번호 : '));
+
+        let pwInput = document.createElement('input');
+        pwInput.setAttribute('type', 'password');
+        pwInput.setAttribute('name', 'upw');
+        pwInput.setAttribute('id', 'upw');
+
+        let submit = document.createElement('input');
+        submit.setAttribute('class', 'submitClass');
+        submit.setAttribute('type', 'submit');
+        submit.setAttribute('value', '로그인');
+
+        let br1 = document.createElement('br');
+        let br2 = document.createElement('br');
+        form.appendChild(labId);
+        form.appendChild(uidInput);
+        form.appendChild(br1);
+        form.appendChild(labUpw);
+        form.appendChild(pwInput);
+        form.appendChild(br2);
+        form.appendChild(submit);
+
+        div.appendChild(form);
+
+        body[0].appendChild(div);
+
+
+        function makeList(){
+            
+        }
+    </script>
+</body>
+
+</html>

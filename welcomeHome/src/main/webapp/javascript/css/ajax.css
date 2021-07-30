@@ -1,8 +1,9 @@
 span {
-    color: rgb(83, 68, 92);
+    background-color: lightblue;
     margin-left: 5px;
     display: inline-block;
     width: 20px;
+    font-weight: bold;
 }
 
 strong {
@@ -26,7 +27,7 @@ strong {
     width: 40%;
 }
 
-.row {
+.title, .row {
     border: 1px solid black;
     margin-left: 5px;
 }

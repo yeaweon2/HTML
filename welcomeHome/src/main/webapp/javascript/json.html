@@ -9,6 +9,7 @@
     <style>
         .jsonList {
             border: 1px solid black;
+            border-collapse: collapse;
         }
 
         .pagination button {
@@ -21,9 +22,43 @@
         }
 
         .pagination button.active {
-            background-color: #4CAF50;
+            background-color: #6479f0;
             color: white;
-            border: 1px solid #4CAF50;
+            border: 1px solid #6479f0;
+        }
+
+        tr {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        .td1,
+        .td2 {
+            width: 50px;
+            text-align: center;
+        }
+
+        .td3 {
+            width: 90px;
+            text-align: left;
+        }
+
+        .td4 {
+            width: 130px;
+            text-align: left;
+        }
+
+        .td5 {
+            width: 280px;
+            text-align: left;
+        }
+
+        .altRow {
+            background-color: rgb(215, 216, 226);
+        }
+
+        .headTr {
+            background-color: lightsteelblue;
         }
     </style>
     <script>
@@ -37,76 +72,121 @@
                 if (xhtp.readyState == 4 && xhtp.status == 200) {
                     let data = JSON.parse(xhtp.response);
                     makePage(data, page, mode);
-                    makePageBtn(data.length);
+                    if (mode) {
+                        makePageBtn(data.length);
+                    }
+
                 }
             };
         }
 
-        function makeTHead(){
+        function makeTHead() {
             let thead = document.createElement('thead');
             let tr = document.createElement('tr');
-
-            let titleTxt = ['ID', 'First Name', 'Last Name', 'E-mail'];
+            tr.className = 'headTr';
+            let titleTxt = ['', 'ID', 'First Name', 'Last Name', 'E-mail'];
             for (let i = 0; i < titleTxt.length; i++) {
                 let th = document.createElement('th');
                 th.appendChild(document.createTextNode(titleTxt[i]));
-                console.log(titleTxt[i]);
                 tr.appendChild(th);
             }
             thead.appendChild(tr);
             return thead;
         }
 
+        function makeControlBtn() {
+            let delBtn = document.createElement('button');
+            let delTxt = document.createTextNode('삭제');
+            delBtn.appendChild(delTxt);
+
+            let controlsDiv = document.getElementById('controls');
+            controlsDiv.appendChild(delBtn);
+
+            delBtn.addEventListener('click', function () { // 
+                let delChkRow = document.querySelectorAll('.delChkTd>input[type="checkBox"]:checked');
+                for (let i = 0; i < delChkRow.length; i++) {
+                    delChkRow[i].parentNode.parentNode.remove();
+                }
+                sortAltRow();
+            });
+        }
+
         function makePage(data, page, mode) {
-            if( mode ){
+
+            makeControlBtn();
+
+            if (mode) {
                 let table = document.createElement('table');
+                table.setAttribute('id', 'jsonList')
                 table.className = 'jsonList';
 
                 let tbody = document.createElement('tbody');
 
-                let startCnt = (page-1) * 20;
-                let endCnt = page *20;
+                let startCnt = (page - 1) * 20;
+                let endCnt = page * 20 - 1;
 
-                for (let i = startCnt; i < endCnt; i++) {
-                    if( endCnt < data.length ){
-                        let newTr = makeTr(data[i], page);
-                        tbody.appendChild(newTr);
-                    }
+                for (let i = startCnt; i <= endCnt; i++) {
+                    let newTr = makeTr(data[i], page);
+                    tbody.appendChild(newTr);
                 }
 
                 table.appendChild(tbody);
-                table.appendChild( makeTHead());
+                table.appendChild(makeTHead());
                 let divShow = document.getElementById('show');
                 divShow.appendChild(table);
 
-            }else{
+            } else {
                 let delList = document.querySelector('table>tbody');
                 let delCnt = delList.children.length;
-                for( let i =0; i < delCnt ; i++){
+                for (let i = 0; i < delCnt; i++) {
                     delList.removeChild(delList.children[0]);
-                } 
+                }
 
-                let startCnt = (page-1) * 20;
-                let endCnt = page *20;
                 let tbdy = document.getElementsByTagName('tbody');
+                let startCnt = (page - 1) * 20;
+                let endCnt = page * 20;
+                endCnt = endCnt > data.length - 1 ? data.length - 1 : endCnt;
 
                 for (let i = startCnt; i < endCnt; i++) {
-                    if( endCnt < data.length ){
-                        let newTr = makeTr(data[i], page);
-                        console.log(newTr);
-                        tbdy.appendChild(newTr);
-                    }
+                    let newTr = makeTr(data[i], page);
+                    tbdy[0].appendChild(newTr);
                 }
             }
-            
+            sortAltRow();
+
+        }
+
+        function sortAltRow(){
+            let sortList = document.querySelector('table>tbody');
+            console.log(sortList);
+            console.log(sortList.childNodes.length);
+            for( let i = 0 ; i < sortList.childNodes.length ; i++ ){
+                if( i % 2 == 0 ){
+                    sortList.childNodes[i].className = '';
+                }else{
+                    sortList.childNodes[i].className = 'altRow';
+                }
+            }
         }
 
         function makeTr(data, page) {
             let tr = document.createElement('tr');
+            let num = 2;
+
+            let chkBoxTd = document.createElement('td');
+            chkBoxTd.className = 'delChkTd';
+            let input = document.createElement('input');
+            input.type = 'checkBox';
+            input.className = 'delChk';
+            chkBoxTd.appendChild(input);
+            tr.appendChild(chkBoxTd);
+
             for (field in data) {
                 let td = document.createElement('td');
+                td.className = 'td' + num;
                 td.appendChild(document.createTextNode(data[field]));
                 tr.appendChild(td);
+                num++;
             }
             return tr;
         }
@@ -117,18 +197,22 @@
                 let btn = document.createElement('button');
                 let btnTxt = document.createTextNode(i + 1);
                 let btnDiv = document.getElementById('btnDiv');
+                if (i == 0) {
+                    btn.className = 'active';
+                }
+
                 btn.appendChild(btnTxt);
                 btnDiv.appendChild(btn);
+
                 btn.addEventListener('click', function () {
                     let btns = document.querySelectorAll('.pagination > button');
 
                     for (let i = 0; i < btns.length; i++) {
                         btns[i].className = '';
                     }
-                     
 
                     ajax('jsonFile.json', this.innerHTML, false);
-                    this.className = 'active';                    
+                    this.className = 'active';
                 });
             }
         }
@@ -136,12 +220,12 @@
 </head>
 
 <body>
-    <div id="show"></div>
+    <div id="controls"></div>
     <br>
-    <div id='btnDiv' class="pagination">
-
-    </div>
+    <div id="show"></div>
     <br><br>
+    <div id='btnDiv' class="pagination"></div>
+    <br>
 </body>
 
 </html>

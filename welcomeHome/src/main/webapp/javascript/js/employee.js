@@ -94,7 +94,6 @@ let jsonData = `[{"id":1,"first_name":"Ellswerth","last_name":"Stanlike","email"
         }
 
         let delBtnClick = (arg) => {
-            window.alert("dkssud");
             // console.log(args.target);
             // console.log(this);
             // console.log(args.target.parentNode.parentNode.childNodes[2].innerHTML);

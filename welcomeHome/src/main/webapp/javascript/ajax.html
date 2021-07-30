@@ -7,20 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>javascript/ajax.html</title>
     <link rel="stylesheet" href="css/ajax.css">
-    <script src="js/ajax.js"></script>
+    <!-- <script src="js/ajax.js"></script> -->
+
 </head>
 
 <body>
     <div class="title">
-        <span class = 'idCls'>id</span>
-        <strong class = 'first'>first_name</strong>
-        <strong class = 'last'>last_name</strong>
-        <strong class = 'email'>e-mail</strong>
+        <span class='idCls'>id</span>
+        <strong class='first'>first_name</strong>
+        <strong class='last'>last_name</strong>
+        <strong class='email'>e-mail</strong>
     </div>
     <div id="show"></div>
     <br>
     <div class="pagination">
-        <button>1</button>
+        <button class='active'>1</button>
         <button>2</button>
         <button>3</button>
         <button>4</button>
@@ -29,6 +30,73 @@
         <button>7</button>
         <button>8</button>
     </div>
+    <script>
+        function ajax(url, page) {
+
+            let show = document.querySelector('#show');
+            for (let i = 0; show.children.length; i++) {
+                show.removeChild(show.children[0]);
+            }
+
+            let startCnt, endCnt;
+            startCnt = (page - 1) * 20;
+            endCnt = page * 20 - 1;
+
+            let xhtp = new XMLHttpRequest();
+            xhtp.open('get', url);
+            xhtp.send();
+            xhtp.onload = function () {
+                let showDiv = document.getElementById('show');
+                let data = JSON.parse(xhtp.responseText);
+                data.filter(function (val, idx) {
+                    if (startCnt <= idx && idx <= endCnt) {
+                        return val;
+                    }
+                }).forEach(function (val, idx) {
+
+                    let div = document.createElement('div');
+                    div.setAttribute('class', 'row');
+
+                    // span: id, strong : fn, ln, email
+                    let span = document.createElement('span');
+                    span.className = 'idCls';
+                    span.innerHTML = val.id;
+
+                    let str_fn = document.createElement('strong');
+                    let str_ln = document.createElement('strong');
+                    let str_em = document.createElement('strong');
+
+                    str_fn.className = 'first';
+                    str_ln.className = 'last';
+                    str_em.className = 'email';
+
+                    str_fn.innerHTML = val.first_name;
+                    str_ln.innerHTML = val.last_name;
+                    str_em.innerHTML = val.email;
+
+                    div.appendChild(span);
+                    div.appendChild(str_fn);
+                    div.appendChild(str_ln);
+                    div.appendChild(str_em);
+                    showDiv.appendChild(div);
+                });
+            }
+        }
+
+        ajax('jsonFile.json', 1);
+
+        let btn = document.querySelectorAll('.pagination>button');
+        for (let i = 0; i < btn.length; i++) {
+            btn[i].addEventListener('click', function () {
+                for (let i = 0; i < btn.length; i++) {
+                    btn[i].className = '';
+                }
+                let page = this.innerHTML;
+                ajax('jsonFile.json', page);
+                this.className = 'active';
+            });
+        }
+    </script>
 </body>
 
 </html>

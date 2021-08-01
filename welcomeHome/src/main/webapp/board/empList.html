@@ -27,12 +27,34 @@
         .submitClass {
             display: inline-block;
         }
+
+        table , tr {
+            border-collapse: collapse;
+            border: 1px solid ;
+        }
+
+        .pagination button {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+}
+
+.pagination button.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}        
     </style>
 </head>
 
 <body>
     <script>
+        let data ;
         let body = document.getElementsByTagName('body');
+        
 
         let div = document.createElement('div');
         div.setAttribute('id', 'container');
@@ -47,8 +69,9 @@
             xhtp.open('get', url);
             xhtp.send();
             xhtp.onload = function(){
-                let data = JSON.parse(xhtp.responseText)
-                console.log(data);
+                data = JSON.parse(xhtp.responseText);
+                makeTable(data, 1);
+                makeBtn(data.length);
             }
         });
 
@@ -77,6 +100,8 @@
 
         let br1 = document.createElement('br');
         let br2 = document.createElement('br');
+        let br3 = document.createElement('br');
+        
         form.appendChild(labId);
         form.appendChild(uidInput);
         form.appendChild(br1);
@@ -88,11 +113,90 @@
         div.appendChild(form);
 
         body[0].appendChild(div);
+        body[0].appendChild(br3);
 
+        function makeTr(emp){           
+            let tr = document.createElement('tr');
 
-        function makeList(){
-            
+            for( field in emp ){
+                let td = document.createElement('td');
+                let txt = document.createTextNode(emp[field]);
+                td.appendChild(txt);
+                tr.appendChild(td);
+            }
+            return tr;    
         }
+
+        function makeTable(data, page){
+            let empList = document.querySelector('.empList');
+            console.log(empList);
+            if( empList != null ){
+                for (let i = 0; empList.children.length; i++) {
+                	empList.removeChild(empList.children[0]);
+                }
+
+                empList.remove();
+            }
+                
+            let table = document.createElement('table');
+            table.className = 'empList';
+            table.setAttribute('border', '1');
+
+            let thead = document.createElement('thead');
+            let tbody = document.createElement('tbody');
+
+            let theadTr = document.createElement('tr');
+
+            for( field in data[0]){
+                let th = document.createElement('th');
+                let txt = document.createTextNode(field);
+                
+                th.appendChild(txt);
+                theadTr.appendChild(th);
+            }
+            
+            let startCnt, endCnt;
+            startCnt = (page - 1) * 20;
+            endCnt = page * 20 - 1;
+
+            data.filter(function (val, idx) {
+                    if (startCnt <= idx && idx <= endCnt) {
+                        return val;
+                    }
+                }).forEach(function (val, idx){
+                	tbody.appendChild(makeTr(val));
+                });
+            
+            thead.appendChild(theadTr);
+            table.appendChild(thead);
+            table.appendChild(tbody);
+
+            document.body.appendChild(table);
+        }
+
+
+    function makeBtn(len){
+    	let cnt = len/20;
+        let body = document.getElementsByTagName('body');
+        for(let i = 0; i < cnt ; i++ ){
+            let btn = document.createElement('button');
+            btn.setAttribute('id','pageBtn');
+            btn.setAttribute('class','pagination');
+            let txt = document.createTextNode((i+1));
+            btn.appendChild(txt);
+            btn.onclick = function (){
+                let btns = document.getElementById('pageBtn');
+                for(let a = 0; a < btns.length ; a++ ){
+                    btns[a].className ='';
+                }
+                this.className = 'active';
+                let page = this.innerHTML;
+                makeTable(data, page);
+            };
+
+            body[0].appendChild(btn);
+        }
+    }
     </script>
 </body>
 

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery/ajax.html</title>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: 'MOCK_DATA.json', // 요청페이지
+                data: {
+                    page: 1
+                },
+                method: 'get', // default값 get
+                dataType: 'json',
+                success: successCallBack,
+                error: function (reject) {
+                    console.log(reject);
+                }
+
+            }); // == XMLHttpRequest(); response(Text);
+
+        });
+
+        function successCallBack(result) {
+            let data = result;
+
+            for (let row of data) {
+                let div = $('<div />').attr('class', 'row')
+                    .html('<span>' + row.id + //
+                        '</span>&nbsp;&nbsp;&nbsp;&nbsp;<strong>' + //
+                        row.first_name + " - " + row.last_name + // 
+                        "</strong>&nbsp;&nbsp;");
+                let btn = $('<button />').html('Del').on('click', delFnc);
+                $(div).append(btn);
+                $('#show').append(div);
+            }
+        }
+
+        function delFnc(){
+            $(this).parent().remove();
+            
+        }
+
+    </script>
+</head>
+
+<body>
+    <div id="show">
+        <div class="row">
+            <span>id</span>&nbsp;&nbsp;&nbsp;&nbsp;<strong>firstName - lastName</strong>
+        </div>
+    </div>
+</body>
+
+</html>

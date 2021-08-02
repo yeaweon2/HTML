@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery/basic.html</title>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>
+        // jquery는 메소드 기준으로 실행된다.
+        // 페이지가 다 로딩되면 function 실행.
+        $(document).ready(function(){
+            $('#show').html('Hello, World ');    // element.innerHTML = "";
+            let ul = $('<ul />');
+            ul.append( $('<li />').html('Apple'));
+            ul.append( $('<li />').html('Mango'));
+            ul.append( $('<li />').html('Banana'));
+            $('#show').append(ul);
+
+            // 삭제
+            $('ul').remove();
+
+            // event
+            //$('<button />').html('Del').on();
+            let btn = $('<button>Del</button>').on('click', function(){
+                console.log('delete');
+            });
+            
+            $('#show').append(btn);
+        });
+    </script>
+</head>
+<body>
+    <div id="show"></div>
+</body>
+</html>
